@@ -1,0 +1,556 @@
+{% extends 'shop/nav_fot.html'%}
+{% block title %} Shop Home {% endblock %}
+{% load static %}
+{% block css %}
+<style>
+  body {
+    background: whitesmoke;
+    scroll-behavior: smooth;
+  }
+
+  .stn {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: .9rem 3rem;
+    border-radius: .5rem;
+    color: #fff;
+    background: #212529;
+    font-size: 1.7rem;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .stn:hover {
+    background-color: #28a745;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .rtn {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: .9rem 5rem;
+    border-radius: .5rem;
+    color: #fff;
+    background: var(--green);
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .Rome {
+    background: url('{% static "shop/banner-bg.jpg" %}') no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 10px;
+  }
+
+  .Rome .sow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .Rome .sow .content {
+    flex: 1 1 42rem;
+  }
+
+  .Rome .sow .books-slider {
+    flex: 1 1 42rem;
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .Rome .sow .books-slider a img {
+    height: 15rem;
+    margin-top: 3rem;
+    padding: 6px;
+    box-shadow: 10px 10px 5px #ccc;
+    -moz-box-shadow: 10px 10px 5px #ccc;
+    -webkit-box-shadow: 10px 10px 5px #ccc;
+    -khtml-box-shadow: 10px 10px 5px #ccc;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+  }
+
+  .Rome .sow .books-slider a:hover img {
+    transform: scale(.9);
+  }
+
+  .Rome .sow .books-slider .stand {
+    width: 80%;
+    margin-top: 1rem;
+  }
+
+  .Rome .sow .content h3 {
+    color: black;
+    font-size: 3.5rem;
+    font-weight: 1000;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  .Rome .sow .content p {
+    color: black;
+    font-size: 1rem;
+    line-height: 2;
+    padding: 1rem 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 1000;
+
+  }
+
+  .carousel {
+    margin: 50px auto;
+    padding: 0 70px;
+
+  }
+
+  .carousel .item {
+    color: #747d89;
+    min-height: 325px;
+    text-align: center;
+    overflow: hidden;
+
+  }
+
+  .carousel .thumb-wrapper {
+    padding: 25px 15px;
+    background: linear-gradient(to top, #dad4ec 0%, #dad4ec 1%, #f3e7e9 100%);
+    border-radius: 6px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .carousel .item .img-box {
+    height: 250px;
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+    padding: 50px;
+  }
+
+  .carousel .item img {
+    max-width: 100%;
+    max-height: 100%;
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    box-shadow: 10px 10px 5px #ccc;
+    -moz-box-shadow: 10px 10px 5px #ccc;
+    -webkit-box-shadow: 10px 10px 5px #ccc;
+    -khtml-box-shadow: 10px 10px 5px #ccc;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+
+  }
+
+  .carousel .item h4 {
+    font-size: 18px;
+  }
+
+  .carousel .item h4,
+  .carousel .item p,
+  .carousel .item ul {
+    margin-bottom: 5px;
+  }
+
+  .carousel .thumb-content .btn {
+    color: black;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: none;
+    border: 1px solid black;
+    padding: 6px 14px;
+    margin-top: 5px;
+    line-height: 16px;
+    border-radius: 20px;
+  }
+
+  .carousel .thumb-content .btn:hover,
+  .carousel .thumb-content .btn:focus {
+    color: #fff;
+    background: #28a745;
+    box-shadow: none;
+  }
+
+  .carousel .thumb-content .btn i {
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 5px;
+  }
+
+  .carousel .item-price {
+    font-size: 13px;
+    padding: 2px 0;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    height: 44px;
+    width: 40px;
+    background: rgba(255, 0, 210, 0.45);
+    margin: auto 0;
+    border-radius: 4px;
+    opacity: 0.8;
+  }
+
+  .carousel-control-prev:hover,
+  .carousel-control-next:hover {
+    background: #78bf00;
+    opacity: 1;
+  }
+
+  .carousel-control-prev i,
+  .carousel-control-next i {
+    font-size: 36px;
+    position: absolute;
+    top: 50%;
+    display: inline-block;
+    margin: -19px 0 0 0;
+    z-index: 5;
+    left: 0;
+    right: 0;
+    color: #fff;
+    text-shadow: none;
+    font-weight: bold;
+  }
+
+  .carousel-control-prev i {
+    margin-left: -2px;
+  }
+
+  .carousel-control-next i {
+    margin-right: -4px;
+  }
+
+  .carousel-indicators {
+    bottom: -50px;
+  }
+
+  .carousel-indicators li,
+  .carousel-indicators li.active {
+    width: 10px;
+    height: 10px;
+    margin: 4px;
+    border-radius: 50%;
+    border: none;
+  }
+
+  .carousel-indicators li {
+    background: rgba(255, 132, 195, 0.8);
+  }
+
+  .carousel-indicators li.active {
+    background: rgba(246, 51, 152, 0.8);
+  }
+</style>
+{% endblock %}
+
+<body>
+
+  {% block body %}
+  <!-- Rome section starts  -->
+
+  <section class="Rome" id="Rome">
+
+    <div class="sow">
+
+      <div class="content">
+        <h3>Upto 75% off on Manga</h3>
+        <p>Get an exclusive Discount on Mangas. Every volume bought on this sale will get an wapping 75% off...
+          Don't Miss..!! Hurry..!!</p>
+        <a href="" class="stn">Shop Now</a>
+      </div>
+
+      <div class="swiper books-slider">
+        <div class="swiper-wrapper">
+          <a href="" class="swiper-slide"><img src="{%static 'shop/book-1.jpg'%}" alt=""></a>
+          <a href="" class="swiper-slide"><img src="{%static 'shop/book-2.jpg'%}" alt=""></a>
+          <a href="" class="swiper-slide"><img src="{%static 'shop/book-3.jpg'%}" alt=""></a>
+          <a href="" class="swiper-slide"><img src="{%static 'shop/book-4.jpg'%}" alt=""></a>
+          <a href="" class="swiper-slide"><img src="{%static 'shop/book-5.jpg'%}" alt=""></a>
+          <a href="" class="swiper-slide"><img src="{%static 'shop/book-6.jpg'%}" alt=""></a>
+          <a href="" class="swiper-slide"><img src="{%static 'shop/book-7.jpg'%}" alt=""></a>
+          <a href="" class="swiper-slide"><img src="{%static 'shop/book-8.jpg'%}" alt=""></a>
+        </div>
+        <img src="{%static 'shop/stand.png'%}" class="stand" alt="">
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    // buffer work
+    fadeOut();
+
+    function loader() {
+      document.querySelector('.loader-container').classList.add('active');
+    }
+
+    function fadeOut() {
+      setTimeout(loader, 2700);
+    }
+
+    // buffer work
+
+    var swiper = new Swiper(".books-slider", {
+      loop: true,
+      centeredSlides: true,
+      autoplay: {
+        delay: 1500,
+        disableOnInteraction: false,
+      },
+      breakpoints: {
+        0: {
+          slidesPerView: 1,
+        },
+        768: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
+      },
+    });
+
+
+
+
+  </script>
+
+
+
+  <div class="container-xxl">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-lg-3 text-center " style="margin:auto;">
+          <h1
+            style="color:black ;font-family: 'Courier New', Courier, monospace; font-size: 45px; font-weight:800; padding-top:50px; text-decoration: underline;">
+            POPULARS</h1>
+        </div>
+        <div id="myCarousels" class="carousel slide" data-ride="carousel" data-interval="0">
+          <!-- Carousel indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousels" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousels" data-slide-to="1"></li>
+            <li data-target="#myCarousels" data-slide-to="2"></li>
+          </ol>
+          <!-- Wrapper for carousel items -->
+          <div class="carousel-inner">
+            <div class="item carousel-item active">
+              <div class="row">
+
+                <div class="col-sm-3">
+                  <div class="thumb-wrapper">
+                    <div class="img-box">
+                      <img src="/media/{{product.0.image}}" alt="">
+                    </div>
+                    <div class="thumb-content">
+                      <h4>{{product.0.product_name}}</h4>
+                      <p class="item-price"> <b>{{product.0.price}}</b></p>
+                      <a href="" class="btn btn-primary">View</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="thumb-wrapper">
+
+                    <div class="img-box">
+                      <img src="/media/{{product.1.image}}" alt="">
+                    </div>
+                    <div class="thumb-content">
+                      <h4>{{product.1.product_name}}</h4>
+
+
+
+                      <p class="item-price"> <b>{{product.1.price}}</b></p>
+                      <a href="" class="btn btn-primary">View</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="thumb-wrapper">
+
+                    <div class="img-box">
+                      <img src="/media/{{product.2.image}}" alt="">
+                    </div>
+                    <div class="thumb-content">
+                      <h4>{{product.2.product_name}}</h4>
+
+
+
+                      <p class="item-price"> <b>{{product.2.price}}</b></p>
+                      <a href="" class="btn btn-primary">View</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="thumb-wrapper">
+
+                    <div class="img-box">
+                      <img src="/media/{{product.3.image}}" alt="">
+                    </div>
+                    <div class="thumb-content">
+                      <h4>{{product.3.product_name}}</h4>
+                      <p class="item-price"> <b>{{product.3.price}}</b></p>
+                      <a href="" class="btn btn-primary">View</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item carousel-item">
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="thumb-wrapper">
+
+                    <div class="img-box">
+                      <img src="{%static 'shop/book-2.jpg'%}" alt="">
+                    </div>
+                    <div class="thumb-content">
+                      <h4>After</h4>
+                      <p class="item-price"> <span>Rs.700</span></p>
+
+
+
+                      <a href="" class="btn btn-primary">View</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="thumb-wrapper">
+
+                    <div class="img-box">
+                      <img src="{%static 'shop/book-2.jpg'%}" alt="">
+                    </div>
+                    <div class="thumb-content">
+                      <h4>Socrates in Love</h4>
+                      <p class="item-price"> <span>Rs.600</span></p>
+
+
+
+                      <a href="" class="btn btn-primary">View</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="thumb-wrapper">
+
+                    <div class="img-box">
+                      <img src="{%static 'shop/book-2.jpg'%}" alt="">
+                    </div>
+                    <div class="thumb-content">
+                      <h4>The Imperial Radch Trilogy</h4>
+                      <p class="item-price"> <span>Rs.500</span></p>
+                      <a href="" class="btn btn-primary">View</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="thumb-wrapper">
+                    <div class="img-box">
+                      <img src="{%static 'shop/book-2.jpg'%}" alt="">
+                    </div>
+                    <div class="thumb-content">
+                      <h4>Frida</h4>
+                      <p class="item-price"> <span>Rs.500</span></p>
+                      <a href="" class="btn btn-primary">View</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item carousel-item">
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="thumb-wrapper">
+
+                    <div class="img-box">
+                      <img src="{%static 'shop/book-2.jpg'%}" alt="">
+                    </div>
+                    <div class="thumb-content">
+                      <h4>The Sound of Waves</h4>
+                      <p class="item-price"> <span>Rs.1200</span></p>
+
+
+
+                      <a href="" class="btn btn-primary">View</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="thumb-wrapper">
+
+                    <div class="img-box">
+                      <img src="{%static 'shop/book-2.jpg'%}" alt="">
+                    </div>
+                    <div class="thumb-content">
+                      <h4>The Promised Neverland</h4>
+                      <p class="item-price"> <span>Rs.1200</span></p>
+
+
+
+                      <a href="" class="btn btn-primary">View</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="thumb-wrapper">
+
+                    <div class="img-box">
+                      <img src="{%static 'shop/book-2.jpg'%}" alt="">
+                    </div>
+                    <div class="thumb-content">
+                      <h4>The Auctioneer</h4>
+                      <p class="item-price"><span>Rs.1300</span></p>
+
+
+
+                      <a href="" class="btn btn-primary">View</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="thumb-wrapper">
+
+                    <div class="img-box">
+                      <img src="{%static 'shop/book-2.jpg'%}" alt="">
+                    </div>
+                    <div class="thumb-content">
+                      <h4>Addicted</h4>
+                      <p class="item-price"> <span>Rs.700</span></p>
+
+
+
+                      <a href="" class="btn btn-primary">View</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Carousel controls -->
+          <a class="carousel-control-prev" href="#myCarousels" data-slide="prev">
+            <i class="fa fa-angle-left"></i>
+          </a>
+          <a class="carousel-control-next" href="#myCarousels" data-slide="next">
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+  <!-- Rome section ense  -->
+</body>
